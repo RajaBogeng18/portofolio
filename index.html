@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danan Jaya | Portofolio</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/20e6b8a4d7.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="header">
+    <div class="container">
+        <nav>
+            <img src="images/logo.png" class="logo">
+            <ul id="sidemenu">
+                <li><a href="#header">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#portfolio">Project</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <i class="fa-solid fa-xmark" onclick="closemenu()"></i>
+            </ul>
+            <i class="fa-solid fa-bars" onclick="openmenu()"></i>
+        </nav>
+        <div class="header-text">
+            <H1>Hi, I'm Danan Jaya</H1>
+        </div>
+    </div>
+</div>
+<!-- ----------------about---------------- -->
+<div id="about">
+    <div class="container">
+        <div class="row">
+            <div class="about-col-1">
+                <img src="images/user.jpg" alt="">
+            </div>
+            <div class="about-col-2">
+                <h1 class="subtitle">About Me</h1>
+                <p>Saya mahasiswa yang penuh rasa ingin tahu dan bersemangat dengan segala hal dan peluang baru. Sedang mencari pengalaman, terutama pengalaman kerja.</p>
+                <div class="tab-titles">
+                    <p  class="tab-links active-link" onclick="opentab('skills')">Skills</p>
+                    <p  class="tab-links" onclick="opentab('education')">Education</p>
+                </div>
+                <div class="tab-contents active-tab" id="skills">
+                    <ul>
+                        <li><span>MICROSOFT TEAMS</span><br>Workplace Collaboration App</span></li>
+                        <li><span>MICROSOFT OFFICE</span><br>Microsoft Word & Microsoft Power Point</span></li>
+                        <li><span>CISCO PACKET TRACER</span><br>Network Simulation Tool</span></li>
+                        <li><span>FIGMA</span><br>Collaborative Design Tool</span></li>
+                        <li><span>Blender</span><br>3D Modeling & Animation Software</span></li>
+                    </ul>
+                </div>
+                <div class="tab-contents" id="education">
+                    <ul>
+                        <li><span>2018 - 2021</span><br>SMA N 1 Payangan</span></li>
+                        <li><span>2021 - 2022 </span><br>Lithan Academy</span></li>
+                        <li><span>2021 - CURRENT</span><br>ITB Stikom Bali</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ------------Portfolio---------- -->
+<div id="portfolio">
+    <div class="container">
+        <h1 class="subtitle">My Work</h1>
+        <div class="work-list">
+            <div class="work">
+                <img src="images/work-1.png" alt="Work 1">
+            </div>
+            <div class="work">
+                <img src="images/work-2.png" alt="Work 2">
+            </div>
+            <div class="work">
+                <img src="images/work-3.png" alt="Work 3">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- --------contact----- -->
+<div id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="contact-left">
+                <h1 class="subtitle">Contect Me</h1>
+                <p><i class="fa-solid fa-envelope"></i> jayadanan18@gmail.com</p>
+                <p><i class="fa-solid fa-square-phone-flip"></i> 0822-6644-5861</p>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/dnanjyaa/?hl=id"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/danan-jaya-5807b3225/"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="https://wa.me//082266445861"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="contact-right">
+                <form name="submit-to-google-sheet">
+                    <input type="text" name="Name" placeholder="Your Name" required>
+                    <input type="text" name="Email" placeholder="Your Email" required>
+                    <textarea name="Message" rows="6" placeholder="Your Massage"></textarea>
+                    <button type="submit" class="btn btn2">Submit</button>
+                </form>
+                <span id="msg"></span>
+            </div>
+        </div>
+    </div>
+    <div class="copyright">
+        <p>Copyright © Kevin. Made with <i class="fa-solid fa-heart"></i> by Easy Tutorial</p>
+    </div>
+</div>
+
+<script>
+
+    var tablinks = document.getElementsByClassName("tab-links")
+    var tabcontents = document.getElementsByClassName("tab-contents")
+
+    function opentab(tabname){
+        for(tablink of tablinks){
+            tablink.classList.remove("active-link");
+        }
+        for(tabcontent of tabcontents){
+            tabcontent.classList.remove("active-tab");
+        }
+        event.currentTarget.classList.add("active-link");
+        document.getElementById(tabname).classList.add("active-tab");
+    }
+
+</script>
+
+<script>
+    var sidemenu = document.getElementById('sidemenu');
+
+    function openmenu(){
+        sidemenu.style.right = "0";
+    }
+    function closemenu(){
+        sidemenu.style.right = "-200px";
+    }
+</script>
+<script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbypnOjMykXo7GChsMITISfxTD9MG1jK-aq-JRBZyHOnmKwa47n1qIMYUBTcP_UTMEsl9Q/exec'
+    const form = document.forms['submit-to-google-sheet']
+    const msg = document.getElementById("msg")
+
+    form.addEventListener('submit', e => {
+      e.preventDefault()
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => {
+            msg.innerHTML = "Message sent successfully"
+            setTimeout(function(){
+                msg.innerHTML = ""
+            },5000)
+            form.reset()
+        })
+        .catch(error => console.error('Error!', error.message))
+    })
+  </script>
+</body>
+</html>
